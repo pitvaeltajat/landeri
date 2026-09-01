@@ -200,7 +200,7 @@ export default async function Home() {
       <header className="topbar">
         <a className="brand" href="/">
           <PitvaMark />
-          ATK
+          Pitkäjärven Vaeltajat ry
         </a>
         {user ? (
           <div className="user">
@@ -225,33 +225,47 @@ export default async function Home() {
 
       <main>
         {/*
-          The association's name carries the page now that the headline is
-          gone. It keeps the eyebrow's styling — this is a change of element,
-          not of design — so that the document still opens on a level-one
-          heading instead of jumping straight to the section titles.
-        */}
-        <h1 className="eyebrow">Pitkäjärven Vaeltajat ry</h1>
+          The emblem, centred and at size. The topbar's copy is a 34px
+          navigation affordance that has to share a bar with the sign-out
+          control; this one is the association putting its name to the page,
+          which is a different job and needs the room to do it.
 
-        {/* Nothing to say to someone already signed in; the tiles are the page. */}
-        {!signedIn && (
-          <>
-            <p className="lede">
-              Kirjaudu kerran PitVan Google-tunnuksella, niin pääset kaikkiin palveluihin. Linkit
-              aukeavat kirjautumisen jälkeen.
-            </p>
-            <form
-              className="actions"
-              action={async () => {
-                'use server';
-                await signIn('google', { redirectTo: '/' });
-              }}
-            >
-              <button className="button" type="submit">
-                Kirjaudu sisään
-              </button>
-            </form>
-          </>
-        )}
+          Same component, not an <img>: it inherits `currentColor`, so the one
+          drawing comes out near-white on the navy bar and navy here without a
+          second asset to keep in sync.
+        */}
+        <div className="hero">
+          <PitvaMark size={112} className="hero-mark" />
+
+          {/*
+            The association's name carries the page now that the headline is
+            gone. It keeps the eyebrow's styling — this is a change of element,
+            not of design — so that the document still opens on a level-one
+            heading instead of jumping straight to the section titles.
+          */}
+          <h1 className="eyebrow">Pitkäjärven Vaeltajat ry</h1>
+
+          {/* Nothing to say to someone already signed in; the tiles are the page. */}
+          {!signedIn && (
+            <>
+              <p className="lede">
+                Kirjaudu kerran PitVan Google-tunnuksella, niin pääset kaikkiin palveluihin. Linkit
+                aukeavat kirjautumisen jälkeen.
+              </p>
+              <form
+                className="actions"
+                action={async () => {
+                  'use server';
+                  await signIn('google', { redirectTo: '/' });
+                }}
+              >
+                <button className="button" type="submit">
+                  Kirjaudu sisään
+                </button>
+              </form>
+            </>
+          )}
+        </div>
 
         <section>
           <h2 className="section-title">PitVan palvelut</h2>
@@ -278,10 +292,6 @@ export default async function Home() {
             ))}
           </ul>
         </section>
-
-        <footer>
-          <p>Pitkäjärven Vaeltajat ry · Espoo</p>
-        </footer>
       </main>
     </div>
   );

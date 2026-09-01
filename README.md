@@ -82,6 +82,24 @@ registrable domain, which a `.pitva.fi` cookie can never reach.
 Next.js App Router, one page. The palette is copied verbatim from Klapi's
 `styles/globals.css` and Budu's `app/globals.css`.
 
+### The emblem
+
+`app/pitva-mark.tsx`, traced from the association's own
+`pitvalogo_ilmantaustaa.png` and shared with Budu. It appears twice: at 34px in
+the topbar, where it is a navigation affordance sharing a bar with the sign-out
+control, and centred above the grid at `clamp(76px, 13vw, 120px)`, where it is
+the association putting its name to the page.
+
+One component and not an `<img>`, because it inherits `currentColor` — the same
+drawing comes out near-white on the navy bar and navy on the page wash, with no
+second asset to keep in sync. The `size` prop sets the width and height
+attributes; the hero overrides them from CSS, which works because both are
+presentation attributes.
+
+Do not take it below about 32px. The arrows are outlines, and under that the
+strokes and the gaps between them both fall inside a device pixel and the mark
+turns into a grey smudge.
+
 ### The tile previews
 
 `app/previews.tsx`. Not screenshots — everything behind these links sits behind

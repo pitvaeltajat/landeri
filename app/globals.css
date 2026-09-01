@@ -78,25 +78,37 @@ a:focus-visible {
   color: var(--primary-foreground);
   box-shadow: 0 1px 3px rgb(34 30 93 / 18%);
 }
+/*
+ * The wordmark is the association's full name, not an acronym, so it is sized
+ * to survive one: 23 characters next to the emblem, with the sign-out control
+ * on the other end of the same bar. `min-width: 0` lets it give up width and
+ * wrap to two lines on a phone rather than push the sign-out off the edge.
+ */
 .brand {
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   color: inherit;
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 650;
   letter-spacing: 0.02em;
-  line-height: 1;
+  line-height: 1.15;
   text-decoration: none;
-  transition: transform 0.15s ease;
 }
 /* The emblem is line art; flex-shrink is off because a cramped phone topbar
    should take its space from the wordmark, never from the mark. */
 .brand svg {
   flex: 0 0 auto;
+  transition: transform 0.15s ease;
 }
-.brand:hover {
-  transform: scale(1.05);
+/*
+ * The hover grows the mark and not the whole brand. Scaling the brand moved a
+ * name this long several pixels to the right, into the gap before the sign-out
+ * control — fine at 1280px, a collision on a phone.
+ */
+.brand:hover svg {
+  transform: scale(1.08);
 }
 /* Signed-in identity in the topbar, mirroring Budu's. */
 .user {
@@ -171,6 +183,41 @@ a:focus-visible {
 }
 
 /* ── Page head ──────────────────────────────────────────────────────────── */
+/*
+ * The emblem centred over the grid. Centred and not left-aligned with the
+ * tiles: at this size the mark is the page's masthead, and a masthead pushed
+ * into the left margin of a four-column grid reads as a stray graphic rather
+ * than as the association signing its own page.
+ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 4px 0 8px;
+}
+/*
+ * Overrides the width/height attributes the component sets — both are
+ * presentation attributes, so this rule wins. Scaled with the viewport rather
+ * than fixed: 120px is right over a four-column grid and far too much over a
+ * single column on a phone. `height: auto` keeps the viewBox's square ratio.
+ */
+.hero-mark {
+  width: clamp(76px, 13vw, 120px);
+  height: auto;
+  color: var(--primary);
+}
+/* The flex gap owns the spacing here, so the elements' own margins go. */
+.hero .eyebrow,
+.hero .lede {
+  margin: 0;
+}
+.hero .actions {
+  margin-top: 6px;
+  justify-content: center;
+}
+
 /*
  * The association's name, and since the headline was removed it is also the
  * page's <h1> — element changed, styling deliberately not, so the document
@@ -385,20 +432,12 @@ a:focus-visible {
   color: inherit;
 }
 
-footer {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  color: var(--muted-foreground);
-  font-size: 13px;
-}
-footer p {
-  margin: 0;
-}
-
 @media (max-width: 760px) {
   .topbar {
     margin-bottom: 28px;
+  }
+  .brand {
+    font-size: 17px;
   }
 }
 @media (max-width: 560px) {
@@ -411,7 +450,8 @@ footer p {
     gap: 10px;
   }
   .brand {
-    font-size: 20px;
+    gap: 8px;
+    font-size: 13.5px;
   }
   .tile-body {
     padding: 14px 15px 16px;
@@ -419,7 +459,7 @@ footer p {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .brand,
+  .brand svg,
   .tile,
   .tile .kind::after {
     transition: none;

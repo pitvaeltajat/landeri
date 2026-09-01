@@ -8,13 +8,19 @@
  * drawing has to come out near-white on the navy topbar. An <img> cannot be
  * recoloured by the page around it.
  *
- * 34px rather than something tidier like 24: the arrows are drawn as outlines,
- * so below about 32 the strokes and the gaps between them both fall under a
- * device pixel and the mark collapses into a grey smudge.
+ * The default 34px rather than something tidier like 24: the arrows are drawn
+ * as outlines, so below about 32 the strokes and the gaps between them both
+ * fall under a device pixel and the mark collapses into a grey smudge. That is
+ * a floor, not a fixed size — the hero on the front page asks for a much larger
+ * one, and the outlines only get better with room.
+ *
+ * `size` sets the attributes; `className` is there so CSS can override them,
+ * which is how the hero scales the mark with the viewport. Both `width` and
+ * `height` are presentation attributes, so any stylesheet rule wins over them.
  */
-export function PitvaMark() {
+export function PitvaMark({ size = 34, className }: { size?: number; className?: string }) {
   return (
-          <svg viewBox="227 226 939 939" width={34} height={34} fill="currentColor" aria-hidden="true" focusable="false">
+          <svg viewBox="227 226 939 939" width={size} height={size} className={className} fill="currentColor" aria-hidden="true" focusable="false">
             <g transform="translate(0,1400) scale(0.1,-0.1)">
               <path d="M5562 11356 c-16 -19 -173 -161 -347 -317 -323 -288 -358 -319 -551 -489 -59 -52 -178 -157 -263 -234 -86 -76 -246 -218 -356 -316 -210 -186 -244 -219 -229 -222 5 -1 140 -2 299 -2 l290 -1 1 -230 c9 -1515 16 -2393 21 -2409 5 -19 23 -19 837 -11 457 4 1004 11 1216 14 l385 6 -3 695 c-2 382 -8 975 -13 1317 -6 342 -8 627 -4 633 4 6 110 10 301 10 232 0 295 3 292 13 -4 12 -166 154 -479 421 -145 124 -356 305 -939 806 -269 232 -354 307 -374 329 -27 30 -49 26 -84 -13z m111 -178 c29 -24 73 -61 98 -83 25 -22 61 -53 80 -69 19 -16 128 -111 244 -210 115 -100 392 -337 615 -529 223 -191 407 -352 408 -357 2 -6 -58 -10 -161 -10 l-165 0 -35 -39 -36 -40 5 -143 c7 -226 24 -1676 24 -2076 0 -281 -3 -364 -12 -367 -18 -5 -2170 -24 -2184 -18 -17 6 -23 314 -30 1533 l-6 1065 -31 33 -31 32 -163 0 c-90 0 -163 3 -163 6 0 4 11 16 24 28 180 162 449 401 490 435 28 24 87 76 131 116 106 96 310 276 585 519 124 109 227 203 228 207 7 19 35 7 85 -33z" />
               <path d="M9690 10168 c0 -18 5 -145 11 -281 10 -211 10 -250 -2 -262 -11 -10 -184 -14 -899 -19 -1483 -11 -1743 -16 -1752 -29 -15 -22 13 -2413 28 -2427 9 -9 1359 3 2129 19 248 6 466 7 485 2 l35 -7 3 -292 c1 -171 6 -292 12 -292 5 0 30 25 57 57 26 31 57 65 67 76 11 11 40 46 65 76 24 31 50 61 57 66 6 6 57 64 112 130 55 66 112 134 127 150 14 17 57 66 95 110 172 201 357 416 519 604 97 112 189 220 206 240 58 71 223 256 244 275 31 28 26 57 -20 101 -22 22 -177 193 -342 379 -166 187 -364 410 -441 495 -76 86 -151 170 -165 186 -86 97 -383 430 -484 543 -66 72 -126 132 -133 132 -9 0 -14 -12 -14 -32z m162 -297 c2 -4 39 -48 84 -97 44 -49 119 -132 165 -184 46 -52 123 -138 169 -190 311 -349 857 -966 868 -981 13 -19 -54 -101 -812 -979 -150 -173 -314 -366 -366 -427 -52 -62 -97 -113 -102 -113 -4 0 -8 68 -8 151 0 155 -4 177 -44 214 -20 19 -32 20 -486 17 -256 -1 -840 -7 -1298 -13 -458 -6 -836 -8 -840 -5 -10 11 -26 2196 -16 2206 5 4 491 11 1089 14 594 4 1176 9 1293 12 l213 6 32 29 32 30 -3 159 c-3 136 -1 160 11 160 9 0 17 -4 19 -9z" />
