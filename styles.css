@@ -1,0 +1,274 @@
+/*
+ * Pitväeltäjät brand palette, carried over verbatim from Klapi's
+ * styles/globals.css and Budu's app/globals.css so the three services and this
+ * lander read as one system.
+ *
+ *   light blue  #BBD1FB  hsl(219 89% 86%)  the call-to-action fill
+ *   dark blue   #221E5D  hsl(244 51% 24%)  primary ink, topbar, all body text
+ *   gray        #C9C5C3  hsl(20  5% 78%)   borders
+ *   brown       #82593E  hsl(24 35% 38%)   warning
+ *   cream       #FBE7B2  hsl(44 90% 84%)   text on a solid brown fill
+ *   red         #A23936  hsl(2  50% 42%)   destructive
+ */
+:root {
+  --background: hsl(219 89% 96%);
+  --foreground: hsl(244 51% 24%);
+  --card: hsl(0 0% 100%);
+  --muted: hsl(220 22% 93%);
+  --muted-foreground: hsl(244 14% 40%);
+  --primary: hsl(244 51% 24%);
+  --primary-foreground: hsl(219 89% 97%);
+  --cta: hsl(219 89% 86%);
+  --cta-hover: hsl(219 85% 80%);
+  --secondary: hsl(20 6% 87%);
+  --border: hsl(20 7% 82%);
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+html {
+  background: var(--background);
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  line-height: 1.5;
+}
+a {
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+.shell {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 16px 56px;
+}
+
+/* ── Topbar ─────────────────────────────────────────────────────────────── */
+/* The same navy bar Budu and Klapi wear, so arriving here reads as the same
+   product rather than a separate site that happens to link to them. */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 64px;
+  margin: 0 -16px 40px;
+  padding: 0 16px;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  box-shadow: 0 1px 3px rgb(34 30 93 / 18%);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+/* The emblem is line art; flex-shrink is off because a cramped phone topbar
+   should take its space from the wordmark, never from the mark. */
+.brand svg {
+  flex: 0 0 auto;
+}
+.brand:hover {
+  transform: scale(1.05);
+}
+.topbar-link {
+  color: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+
+/* ── Page head ──────────────────────────────────────────────────────────── */
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 0 0 10px;
+  font-size: 34px;
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+}
+.lede {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--muted-foreground);
+}
+
+/* ── The boxes ──────────────────────────────────────────────────────────── */
+/*
+ * auto-fit with a 260px floor rather than a fixed column count: four tiles go
+ * 4-up on a desktop, 2-up on a tablet and 1-up on a phone without a media query
+ * per step. minmax(260px, 1fr) — the 1fr is what makes the last row's tiles
+ * stretch to fill instead of sitting at 260px with a gap beside them.
+ */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 168px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  color: var(--foreground);
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgb(34 30 93 / 7%);
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: 0 6px 18px rgb(34 30 93 / 12%);
+}
+.tile h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.3px;
+}
+/* The arrow leans into the hover rather than appearing on it — an affordance
+   that only exists under the cursor is invisible to a touch user. */
+.tile h2::after {
+  content: '→';
+  color: var(--muted-foreground);
+  font-weight: 400;
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+.tile:hover h2::after {
+  transform: translateX(3px);
+  color: var(--primary);
+}
+.tile p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+/* Pushed to the bottom of the tile so the pills line up across a row whatever
+   the description's length. */
+.tile .kind {
+  margin-top: auto;
+  padding-top: 12px;
+  color: var(--muted-foreground);
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* The sign-in tile is the way *in*, not a fourth service, so it takes the
+   call-to-action fill that Budu and Klapi use for their primary button. */
+.tile-cta {
+  background: var(--cta);
+  border-color: transparent;
+}
+.tile-cta:hover {
+  background: var(--cta-hover);
+  border-color: var(--primary);
+}
+.tile-cta p,
+.tile-cta .kind,
+.tile-cta h2::after {
+  color: var(--foreground);
+}
+
+footer {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+footer p {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+}
+@media (max-width: 560px) {
+  .shell {
+    padding: 0 12px 40px;
+  }
+  .topbar {
+    margin: 0 -12px 24px;
+    padding: 0 12px;
+    gap: 10px;
+  }
+  .brand {
+    font-size: 20px;
+  }
+  .tile {
+    min-height: 0;
+    padding: 18px;
+  }
+  h1 {
+    font-size: 26px;
+    letter-spacing: -0.8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .tile,
+  .tile h2::after {
+    transition: none;
+  }
+  .tile:hover {
+    transform: none;
+  }
+}
