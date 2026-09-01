@@ -8,7 +8,7 @@ pinned to `.pitva.fi`, which klapi.pitva.fi, budu.pitva.fi and
 tapahtumat.pitva.fi all read — so those three never ask for a credential of
 their own.
 
-### Yhdistyksen palvelut
+### PitVan palvelut
 
 | Box               | Target                      | Session         |
 | ----------------- | --------------------------- | --------------- |

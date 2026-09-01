@@ -54,7 +54,7 @@ const SERVICES: Destination[] = [
     href: 'https://tapahtumat.pitva.fi',
     domain: 'tapahtumat.pitva.fi',
     kind: 'Tapahtumat',
-    description: 'Tapahtumien ilmoittautumiset ja niiden vienti yhdistyksen kalenteriin.',
+    description: 'Tapahtumien ilmoittautumiset ja niiden vienti PitVan kalenteriin.',
     Preview: TapahtumatPreview,
   },
   {
@@ -65,7 +65,7 @@ const SERVICES: Destination[] = [
     href: 'https://pitva.fi/kirjaudu',
     domain: 'pitva.fi',
     kind: 'Erillinen kirjautuminen',
-    description: 'Yhdistyksen julkiset nettisivut ja jäsenosio, jolla on oma kirjautumisensa.',
+    description: 'PitVan julkiset nettisivut ja jäsenosio, jolla on oma kirjautumisensa.',
     Preview: NettisivutPreview,
   },
 ];
@@ -83,7 +83,7 @@ const WORKSPACE: Destination[] = [
     href: 'https://mail.google.com/mail/',
     domain: 'mail.google.com',
     kind: 'Sähköposti',
-    description: 'Yhdistyksen sähköposti ja jaetut osoitteet Google Workspacessa.',
+    description: 'PitVan sähköposti ja jaetut osoitteet Google Workspacessa.',
     Preview: GmailPreview,
   },
   {
@@ -91,7 +91,7 @@ const WORKSPACE: Destination[] = [
     href: 'https://drive.google.com/drive/my-drive',
     domain: 'drive.google.com',
     kind: 'Tiedostot',
-    description: 'Yhdistyksen yhteiset tiedostot, jaetut asemat ja pöytäkirjat.',
+    description: 'PitVan yhteiset tiedostot, jaetut asemat ja pöytäkirjat.',
     Preview: DrivePreview,
   },
   {
@@ -99,7 +99,7 @@ const WORKSPACE: Destination[] = [
     href: 'https://calendar.google.com/calendar/r',
     domain: 'calendar.google.com',
     kind: 'Kalenteri',
-    description: 'Yhdistyksen kalenterit: leirit, kokoukset ja kaluston varaukset.',
+    description: 'PitVan kalenterit: leirit, kokoukset ja kaluston varaukset.',
     Preview: KalenteriPreview,
   },
   {
@@ -224,19 +224,20 @@ export default async function Home() {
       </header>
 
       <main>
-        <p className="eyebrow">Pitkäjärven Vaeltajat ry</p>
-        <h1>Yhdistyksen omat palvelut</h1>
+        {/*
+          The association's name carries the page now that the headline is
+          gone. It keeps the eyebrow's styling — this is a change of element,
+          not of design — so that the document still opens on a level-one
+          heading instead of jumping straight to the section titles.
+        */}
+        <h1 className="eyebrow">Pitkäjärven Vaeltajat ry</h1>
 
-        {signedIn ? (
-          <p className="lede">
-            Olet kirjautunut. Palvelut alla tunnistavat sinut suoraan — erillistä kirjautumista ei
-            tarvita.
-          </p>
-        ) : (
+        {/* Nothing to say to someone already signed in; the tiles are the page. */}
+        {!signedIn && (
           <>
             <p className="lede">
-              Kirjaudu kerran yhdistyksen Google-tunnuksella, niin pääset kaikkiin palveluihin.
-              Linkit aukeavat kirjautumisen jälkeen.
+              Kirjaudu kerran PitVan Google-tunnuksella, niin pääset kaikkiin palveluihin. Linkit
+              aukeavat kirjautumisen jälkeen.
             </p>
             <form
               className="actions"
@@ -253,7 +254,7 @@ export default async function Home() {
         )}
 
         <section>
-          <h2 className="section-title">Yhdistyksen palvelut</h2>
+          <h2 className="section-title">PitVan palvelut</h2>
           <ul className="tiles">
             {SERVICES.map((destination) => (
               <Tile

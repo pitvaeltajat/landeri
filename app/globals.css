@@ -171,6 +171,13 @@ a:focus-visible {
 }
 
 /* ── Page head ──────────────────────────────────────────────────────────── */
+/*
+ * The association's name, and since the headline was removed it is also the
+ * page's <h1> — element changed, styling deliberately not, so the document
+ * still opens on a level-one heading rather than on a section title. There is
+ * no bare `h1` rule for that reason: it would land here and half-win on the
+ * properties this class does not set.
+ */
 .eyebrow {
   margin: 0 0 8px;
   color: var(--primary);
@@ -178,12 +185,7 @@ a:focus-visible {
   font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-h1 {
-  margin: 0 0 10px;
-  font-size: 34px;
-  letter-spacing: -1.2px;
-  line-height: 1.15;
+  line-height: 1.5;
 }
 .lede {
   margin: 0;
@@ -398,9 +400,6 @@ footer p {
   .topbar {
     margin-bottom: 28px;
   }
-  h1 {
-    font-size: 30px;
-  }
 }
 @media (max-width: 560px) {
   .shell {
@@ -416,10 +415,6 @@ footer p {
   }
   .tile-body {
     padding: 14px 15px 16px;
-  }
-  h1 {
-    font-size: 26px;
-    letter-spacing: -0.8px;
   }
 }
 
