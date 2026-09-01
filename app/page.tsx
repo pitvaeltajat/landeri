@@ -7,6 +7,7 @@ import {
   HallintaPreview,
   KalenteriPreview,
   KlapiPreview,
+  KuvatPreview,
   NettisivutPreview,
   TapahtumatPreview,
 } from './previews';
@@ -58,13 +59,26 @@ const SERVICES: Destination[] = [
     Preview: TapahtumatPreview,
   },
   {
+    // The association's photo archive. Not one of ours: kuvat.pitva.fi is a
+    // CNAME to pitva.kuvat.fi, so the gallery runs on kuvat.fi's platform and
+    // knows nothing about the session this app issues. Public to read, which is
+    // why its tile can carry a real screenshot with no blurring.
+    name: 'Kuvat',
+    href: 'https://kuvat.pitva.fi',
+    domain: 'kuvat.pitva.fi',
+    kind: 'Kuva-arkisto',
+    description: 'PitVan kuva-arkisto: leirit ja retket vuosittain omissa albumeissaan.',
+    Preview: KuvatPreview,
+  },
+  {
     // The association's WordPress site. Deliberately not part of the shared
     // session: it lives on pitkajarvenvaeltajat.fi, a different registrable
     // domain, so a .pitva.fi cookie can never reach it.
     name: 'Nettisivut',
     href: 'https://pitva.fi/kirjaudu',
     domain: 'pitva.fi',
-    kind: 'Erillinen kirjautuminen',
+    // Short enough not to wrap in a 230px tile, which "Erillinen kirjautuminen" did.
+    kind: 'Oma kirjautuminen',
     description: 'PitVan julkiset nettisivut.',
     Preview: NettisivutPreview,
   },

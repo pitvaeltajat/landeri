@@ -255,8 +255,10 @@ a:focus-visible {
 
 /* ── The boxes ──────────────────────────────────────────────────────────── */
 /*
- * A 260px floor rather than a fixed column count: tiles go 4-up on a desktop,
- * 2-up on a tablet and 1-up on a phone without a media query per step.
+ * A 230px floor rather than a fixed column count: tiles go 5-up on a desktop,
+ * 2-up on a tablet and 1-up on a phone without a media query per step. 230 and
+ * not 260 because the association's section holds five — at 260 the fifth wrapped
+ * to a row of its own and sat there alone next to three empty columns.
  *
  * auto-*fill* and not auto-fit, which is the usual choice: the two sections are
  * separate grids, and the Workspace one holds three tiles when the admin
@@ -267,7 +269,7 @@ a:focus-visible {
  */
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
   gap: 16px;
   margin: 14px 0 0;
   padding: 0;

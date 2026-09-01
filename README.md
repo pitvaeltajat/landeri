@@ -15,7 +15,12 @@ their own.
 | Klapi             | https://klapi.pitva.fi      | shared cookie   |
 | Budu              | https://budu.pitva.fi       | shared cookie   |
 | Tapahtumamanageri | https://tapahtumat.pitva.fi | shared cookie   |
+| Kuvat             | https://kuvat.pitva.fi      | none — public   |
 | Nettisivut        | https://pitva.fi            | its own login   |
+
+`kuvat.pitva.fi` is a CNAME to `pitva.kuvat.fi`: the gallery runs on kuvat.fi's
+platform and knows nothing about the session this app issues. It is public to
+read, which is why its tile can carry an unedited screenshot.
 
 ### Google Workspace
 
@@ -104,7 +109,7 @@ turns into a grey smudge.
 
 `app/previews.tsx`, and they split the same way the page does.
 
-**The association's four are real screenshots**, in `public/previews/`, captured
+**The association's five are real screenshots**, in `public/previews/`, captured
 signed in and scaled to 640px — roughly twice the width a tile ever paints them
 at, which is enough for the layout to read and not enough for body text to.
 
@@ -122,17 +127,19 @@ camera saw:
   to the form itself. The event list one tab over carries members' names, an
   email address and a phone number, and must not be used.
 
-Klapi's catalogue (item names, thumbnails) and the public WordPress front page
-carry nothing sensitive and are as captured, the latter with the WordPress admin
-bar cropped off the top.
+Klapi's catalogue (item names, thumbnails), the public photo gallery and the
+public WordPress front page carry nothing sensitive and are as captured, the
+last with the WordPress admin bar cropped off the top.
 
 **Re-capturing any of these means re-checking that.** A screenshot of a
 signed-in internal service is the one asset on this site that can leak.
 
-**The four Google destinations get drawn marks**, in Google's product palette.
-There is no signed-out screenshot of an inbox to take and a real one would
-publish somebody's mail; a stylised silhouette says which product it is without
-any of that. They are placeholders, not the official logos.
+**The four Google tiles are Google's own hero mockups** from
+workspace.google.com, flattened onto white and letterboxed into the same 16:9
+band so the four sit at one visual weight. There is no signed-out screenshot of
+an inbox to take and a real one would publish somebody's mail. They are Google's
+artwork, used to point at Google's products; if that ever has to stop, the drawn
+marks they replaced are in the history.
 
 Each tile also prints its host under its name. Two of these are called "Budu"
 and "Klapi", names that mean nothing outside the committee, and the address is
