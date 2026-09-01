@@ -98,6 +98,70 @@ a:focus-visible {
 .brand:hover {
   transform: scale(1.05);
 }
+/* Signed-in identity in the topbar, mirroring Budu's. */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+/*
+ * The address is the only part that can be truncated and still read, so it is
+ * the part that gives up width; the sign-out control holds its size and refuses
+ * to wrap, because "Kirjaudu ulos" broken across two lines reads as a fault.
+ */
+.user > span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user > form {
+  flex: 0 0 auto;
+}
+.link-button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 4px 0;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The sign-in call to action, on the page rather than in the bar. */
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--cta);
+  color: var(--foreground);
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.button:hover {
+  background: var(--cta-hover);
+}
+.button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
 .topbar-link {
   color: inherit;
   font-size: 14px;
