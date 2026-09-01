@@ -321,10 +321,22 @@ a:focus-visible {
   background: var(--muted);
   border-bottom: 1px solid var(--border);
 }
-.preview svg {
+.preview svg,
+.preview img {
   display: block;
   width: 100%;
   height: 100%;
+}
+/*
+ * The captures are 640x340 and the band is 16:9, so something has to give.
+ * `cover` from the top: a screenshot's top edge carries the app's own topbar
+ * and its first row of content, which is the part that identifies it — the
+ * bottom of a viewport is usually half-finished content and whitespace.
+ */
+.preview img {
+  object-fit: cover;
+  object-position: top center;
+  background: var(--muted);
 }
 /* Name over host, not beside it: "Tapahtumamanageri" and "tapahtumat.pitva.fi"
    do not share a 260px line, and side by side it was the host that got cut. */

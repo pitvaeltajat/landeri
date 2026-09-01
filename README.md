@@ -102,19 +102,37 @@ turns into a grey smudge.
 
 ### The tile previews
 
-`app/previews.tsx`. Not screenshots — everything behind these links sits behind
-a login, so nothing here could be captured without baking a signed-in session's
-contents into a public asset. They are wireframes, drawn inline as SVG in the
-palette variables, so they cost no request and re-tint themselves if the brand
-tokens move.
+`app/previews.tsx`, and they split the same way the page does.
 
-They split the same way the page does. The association's own four apps get a
-*screen*: the navy topbar those apps actually wear, with their characteristic
-content under it — Klapi's lending rows, Budu's bars under a budget line,
-Tapahtumamanageri's month grid, a browser for the public site. The four Google
-destinations get a *mark*, because a generic Google screen would tell nobody
-which of the four it was. What matters in each is the silhouette, not the
-detail.
+**The association's four are real screenshots**, in `public/previews/`, captured
+signed in and scaled to 640px — roughly twice the width a tile ever paints them
+at, which is enough for the layout to read and not enough for body text to.
+
+They are **public assets**. The tiles render for signed-out visitors, so
+anything legible in these files is legible to anyone who loads the page, and to
+anything that caches or indexes it. Two of them are therefore not what the
+camera saw:
+
+- **Budu** — the four headline totals, the two Yleiskuva amounts and the
+  signed-in address are gaussian-blurred before the file ships. They survived
+  the downscale perfectly readably; the account rows below them did not, and are
+  left alone. `scratchpad/blur.py`-style region blurring, coordinates in the
+  1512x805 capture.
+- **Tapahtumamanageri** — deliberately its empty *Lisää tapahtuma* form, cropped
+  to the form itself. The event list one tab over carries members' names, an
+  email address and a phone number, and must not be used.
+
+Klapi's catalogue (item names, thumbnails) and the public WordPress front page
+carry nothing sensitive and are as captured, the latter with the WordPress admin
+bar cropped off the top.
+
+**Re-capturing any of these means re-checking that.** A screenshot of a
+signed-in internal service is the one asset on this site that can leak.
+
+**The four Google destinations get drawn marks**, in Google's product palette.
+There is no signed-out screenshot of an inbox to take and a real one would
+publish somebody's mail; a stylised silhouette says which product it is without
+any of that. They are placeholders, not the official logos.
 
 Each tile also prints its host under its name. Two of these are called "Budu"
 and "Klapi", names that mean nothing outside the committee, and the address is
