@@ -65,7 +65,7 @@ const SERVICES: Destination[] = [
     href: 'https://pitva.fi/kirjaudu',
     domain: 'pitva.fi',
     kind: 'Erillinen kirjautuminen',
-    description: 'PitVan julkiset nettisivut ja jäsenosio, jolla on oma kirjautumisensa.',
+    description: 'PitVan julkiset nettisivut.',
     Preview: NettisivutPreview,
   },
 ];
