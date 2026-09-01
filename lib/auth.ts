@@ -20,6 +20,24 @@ declare module '@auth/core/jwt' {
   }
 }
 
+// Augmented on `@auth/core/types` for the same reason the JWT is: `next-auth`
+// re-exports `Session` from here verbatim, and TypeScript will not augment a
+// bare re-export.
+declare module '@auth/core/types' {
+  interface Session {
+    /**
+     * The signed-in account's Workspace domain, copied out of the JWT so the
+     * page can read it without decoding a token itself.
+     *
+     * The lander uses it for two cosmetic decisions only — which Google account
+     * the Workspace links point at, and whether to show the admin console tile.
+     * It is not an entitlement: every service downstream re-checks the claim on
+     * the token, and Google decides who the admin console actually opens for.
+     */
+    hd?: string | null;
+  }
+}
+
 /**
  * The parent domain the session cookie is pinned to — `.pitva.fi`.
  *
@@ -139,6 +157,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.hd = typeof profile?.hd === 'string' ? profile.hd.trim().toLowerCase() : null;
       }
       return token;
+    },
+    async session({ session, token }) {
+      // Surfaced for the tiles, nothing more — see the augmentation above.
+      session.hd = token.hd ?? null;
+      return session;
     },
   },
 });

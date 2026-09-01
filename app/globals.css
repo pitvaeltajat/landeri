@@ -191,31 +191,50 @@ h1 {
   color: var(--muted-foreground);
 }
 
+/* ── Sections ───────────────────────────────────────────────────────────── */
+/* Two groups, because the second one is not ours: the tiles under "Google
+   Workspace" leave pitva.fi entirely and are not covered by the session this
+   app issues. The heading is the only thing saying so, so it is not decorative. */
+.section-title {
+  margin: 36px 0 0;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
 /* ── The boxes ──────────────────────────────────────────────────────────── */
 /*
- * auto-fit with a 260px floor rather than a fixed column count: four tiles go
- * 4-up on a desktop, 2-up on a tablet and 1-up on a phone without a media query
- * per step. minmax(260px, 1fr) — the 1fr is what makes the last row's tiles
- * stretch to fill instead of sitting at 260px with a gap beside them.
+ * A 260px floor rather than a fixed column count: tiles go 4-up on a desktop,
+ * 2-up on a tablet and 1-up on a phone without a media query per step.
+ *
+ * auto-*fill* and not auto-fit, which is the usual choice: the two sections are
+ * separate grids, and the Workspace one holds three tiles when the admin
+ * console is hidden. auto-fit would collapse the empty track and stretch those
+ * three across the full width, leaving two rows of visibly different tiles
+ * stacked on each other. auto-fill keeps the track, so the columns line up
+ * between the sections whatever each one happens to contain.
  */
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
-  margin: 28px 0 0;
+  margin: 14px 0 0;
   padding: 0;
   list-style: none;
 }
 .tile {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   height: 100%;
-  min-height: 168px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
+  /* No padding: the preview is meant to reach the card's edges. The text below
+     it is inset by .tile-body instead. */
+  padding: 0;
+  overflow: hidden;
   color: var(--foreground);
   text-decoration: none;
   box-shadow: 0 1px 2px rgb(34 30 93 / 7%);
@@ -224,42 +243,79 @@ h1 {
     border-color 0.15s ease,
     box-shadow 0.15s ease;
 }
+.tile-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px 18px;
+}
 .tile:hover {
   transform: translateY(-2px);
   border-color: var(--primary);
   box-shadow: 0 6px 18px rgb(34 30 93 / 12%);
 }
-.tile h2 {
+
+/*
+ * The wireframe band. `aspect-ratio` rather than a fixed height so the drawing
+ * keeps its proportions as the grid's columns stretch, and the clip lives here
+ * rather than in each SVG — one rule instead of a `clipPath` with a unique id
+ * per drawing.
+ */
+.preview {
+  display: block;
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  /* Behind the drawing while it paints, and the hairline that separates it from
+     the text — the drawings are pale and would otherwise float. */
+  background: var(--muted);
+  border-bottom: 1px solid var(--border);
+}
+.preview svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Name over host, not beside it: "Tapahtumamanageri" and "tapahtumat.pitva.fi"
+   do not share a 260px line, and side by side it was the host that got cut. */
+.tile-head {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.tile h3 {
   margin: 0;
-  font-size: 20px;
+  font-size: 19px;
+  font-weight: 650;
   letter-spacing: -0.3px;
 }
-/* The arrow leans into the hover rather than appearing on it — an affordance
-   that only exists under the cursor is invisible to a touch user. */
-.tile h2::after {
-  content: '→';
+/*
+ * The host. Two tiles can carry names nobody outside the committee knows —
+ * "Budu", "Klapi" — and the address is the part people recognise, so it is
+ * printed rather than left to the status bar, which a phone has none of.
+ * Monospace and small: it is a label to check, not to read.
+ */
+.domain {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
   color: var(--muted-foreground);
-  font-weight: 400;
-  transition:
-    transform 0.15s ease,
-    color 0.15s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.tile:hover h2::after {
-  transform: translateX(3px);
-  color: var(--primary);
-}
-.tile p {
-  margin: 0;
+.tile-description {
   color: var(--muted-foreground);
   font-size: 14px;
 }
 /* Pushed to the bottom of the tile so the pills line up across a row whatever
    the description's length. */
 .tile .kind {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-top: auto;
   padding-top: 12px;
   color: var(--muted-foreground);
@@ -268,21 +324,63 @@ h1 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+/* The arrow rides the bottom row now that the head's right edge belongs to the
+   host. It leans into the hover rather than appearing on it — an affordance
+   that only exists under the cursor is invisible to a touch user. */
+.tile .kind::after {
+  content: '→';
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: normal;
+  transition:
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+.tile:hover .kind::after {
+  transform: translateX(3px);
+  color: var(--primary);
+}
 
-/* The sign-in tile is the way *in*, not a fourth service, so it takes the
-   call-to-action fill that Budu and Klapi use for their primary button. */
-.tile-cta {
-  background: var(--cta);
-  border-color: transparent;
+/* ── Locked ─────────────────────────────────────────────────────────────── */
+/*
+ * Before sign-in. The tile is a <div> and not an <a>, so there is nothing here
+ * to un-focus or un-click — this only has to *look* unavailable, and look it
+ * without the tiles vanishing, because half the reason to visit signed out is
+ * to see what the association has.
+ *
+ * Greyed and dimmed rather than hidden, no lift on hover, and the arrow becomes
+ * a padlock: the affordance is what changes, not just the colour, so it still
+ * reads for anyone who cannot see the difference between grey and navy.
+ */
+.tile-locked {
+  cursor: default;
+  background: var(--muted);
+  box-shadow: none;
 }
-.tile-cta:hover {
-  background: var(--cta-hover);
-  border-color: var(--primary);
+.tile-locked:hover {
+  transform: none;
+  border-color: var(--border);
+  box-shadow: none;
 }
-.tile-cta p,
-.tile-cta .kind,
-.tile-cta h2::after {
-  color: var(--foreground);
+.tile-locked .preview {
+  opacity: 0.4;
+  filter: grayscale(1);
+}
+.tile-locked h3,
+.tile-locked .domain,
+.tile-locked .tile-description,
+.tile-locked .kind {
+  color: var(--muted-foreground);
+}
+.tile-locked .kind::after {
+  content: '🔒';
+  font-size: 13px;
+}
+.tile-locked:hover .kind::after {
+  transform: none;
+  color: inherit;
 }
 
 footer {
@@ -316,9 +414,8 @@ footer p {
   .brand {
     font-size: 20px;
   }
-  .tile {
-    min-height: 0;
-    padding: 18px;
+  .tile-body {
+    padding: 14px 15px 16px;
   }
   h1 {
     font-size: 26px;
@@ -329,7 +426,7 @@ footer p {
 @media (prefers-reduced-motion: reduce) {
   .brand,
   .tile,
-  .tile h2::after {
+  .tile .kind::after {
     transition: none;
   }
   .tile:hover {
