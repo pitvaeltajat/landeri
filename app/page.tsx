@@ -7,6 +7,7 @@ import {
   HallintaPreview,
   KalenteriPreview,
   KlapiPreview,
+  KululaskutPreview,
   KuvatPreview,
   NettisivutPreview,
   TapahtumatPreview,
@@ -69,6 +70,18 @@ const SERVICES: Destination[] = [
     kind: 'Kuva-arkisto',
     description: 'PitVan kuva-arkisto: leirit ja retket vuosittain omissa albumeissaan.',
     Preview: KuvatPreview,
+  },
+  {
+    // Expense claims, on kululaskut.fi's platform — external like Kuvat, and
+    // like Kuvat it shares none of this app's session. The form is open to
+    // anyone with the link and asks for the claimant's own bank details, so it
+    // has no signed-in state to leak: the tile's screenshot is the empty form.
+    name: 'Kululaskut',
+    href: 'https://pitva.kululaskut.fi',
+    domain: 'pitva.kululaskut.fi',
+    kind: 'Kulukorvaukset',
+    description: 'Kulukorvaukset ja kilometrikorvaukset kuitteineen yhdellä lomakkeella.',
+    Preview: KululaskutPreview,
   },
   {
     // The association's WordPress site. Deliberately not part of the shared

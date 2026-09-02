@@ -16,11 +16,15 @@ their own.
 | Budu              | https://budu.pitva.fi       | shared cookie   |
 | Tapahtumamanageri | https://tapahtumat.pitva.fi | shared cookie   |
 | Kuvat             | https://kuvat.pitva.fi      | none — public   |
+| Kululaskut        | https://pitva.kululaskut.fi | none — public   |
 | Nettisivut        | https://pitva.fi            | its own login   |
 
-`kuvat.pitva.fi` is a CNAME to `pitva.kuvat.fi`: the gallery runs on kuvat.fi's
-platform and knows nothing about the session this app issues. It is public to
-read, which is why its tile can carry an unedited screenshot.
+The last three are not ours. `kuvat.pitva.fi` is a CNAME to `pitva.kuvat.fi`,
+Kululaskut is a tenant on kululaskut.fi, and the WordPress site is on
+pitkajarvenvaeltajat.fi — none of them knows anything about the session this app
+issues, and the cookie could not reach the last one in any case. The gallery and
+the expense form are both open to anyone with the link, which is why their tiles
+can carry unedited screenshots.
 
 ### Google Workspace
 
@@ -109,7 +113,7 @@ turns into a grey smudge.
 
 `app/previews.tsx`, and they split the same way the page does.
 
-**The association's five are real screenshots**, in `public/previews/`, captured
+**The association's six are real screenshots**, in `public/previews/`, captured
 signed in and scaled to 640px — roughly twice the width a tile ever paints them
 at, which is enough for the layout to read and not enough for body text to.
 
@@ -127,9 +131,9 @@ camera saw:
   to the form itself. The event list one tab over carries members' names, an
   email address and a phone number, and must not be used.
 
-Klapi's catalogue (item names, thumbnails), the public photo gallery and the
-public WordPress front page carry nothing sensitive and are as captured, the
-last with the WordPress admin bar cropped off the top.
+Klapi's catalogue (item names, thumbnails), the public photo gallery, the empty
+expense-claim form and the public WordPress front page carry nothing sensitive
+and are as captured, the last with the WordPress admin bar cropped off the top.
 
 **Re-capturing any of these means re-checking that.** A screenshot of a
 signed-in internal service is the one asset on this site that can leak.

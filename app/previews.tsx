@@ -2,7 +2,7 @@
  * The little pictures on the tiles. Every one is now an image in
  * `public/previews/`, but they come from two very different places.
  *
- * **The association's five** are real screenshots, captured signed in and
+ * **The association's six** are real screenshots, captured signed in and
  * scaled to 640px — about twice the width a tile ever paints them at, which is
  * enough for the layout to read and not enough for body text to.
  *
@@ -48,6 +48,9 @@ export function TapahtumatPreview() {
 }
 export function KuvatPreview() {
   return <Shot src="/previews/kuvat.jpg" height={360} />;
+}
+export function KululaskutPreview() {
+  return <Shot src="/previews/kululaskut.jpg" height={360} />;
 }
 export function NettisivutPreview() {
   return <Shot src="/previews/nettisivut.jpg" height={317} />;
