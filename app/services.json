@@ -24,7 +24,7 @@
       "laji": "Kalustonhallinta",
       "kuvaus": "Kaluston lainaus ja palautus: varaukset, lainassa olevat kamat ja kioskinäkymä."
     },
-    {
+    { 
       "id": "budu",
       "nimi": "Budu",
       "linkki": "https://budu.pitva.fi",
@@ -38,7 +38,7 @@
       "linkki": "https://tapahtumat.pitva.fi",
       "osoite": "tapahtumat.pitva.fi",
       "laji": "Tapahtumat",
-      "kuvaus": "Tapahtumien ilmoittautumiset ja niiden vienti PitVan kalenteriin."
+      "kuvaus": "Tapahtumien luonti ja niiden vienti PitVan tapahtumakalenteriin."
     },
     {
       "id": "kuvat",
@@ -46,7 +46,7 @@
       "linkki": "https://kuvat.pitva.fi",
       "osoite": "kuvat.pitva.fi",
       "laji": "Kuva-arkisto",
-      "kuvaus": "PitVan kuva-arkisto: leirit ja retket vuosittain omissa albumeissaan."
+      "kuvaus": "PitVan kuva-arkisto"
     },
     {
       "id": "kululaskut",
@@ -54,7 +54,7 @@
       "linkki": "https://pitva.kululaskut.fi",
       "osoite": "pitva.kululaskut.fi",
       "laji": "Kulukorvaukset",
-      "kuvaus": "Kulukorvaukset ja kilometrikorvaukset kuitteineen yhdellä lomakkeella."
+      "kuvaus": "Kulukorvaukset ja kilometrikorvaukset"
     },
     {
       "id": "nettisivut",
@@ -62,7 +62,7 @@
       "linkki": "https://pitva.fi/kirjaudu",
       "osoite": "pitva.fi",
       "laji": "Oma kirjautuminen",
-      "kuvaus": "PitVan julkiset nettisivut."
+      "kuvaus": "PitVan nettisivut"
     }
   ],
 
@@ -73,7 +73,7 @@
       "linkki": "https://mail.google.com/mail/",
       "osoite": "mail.google.com",
       "laji": "Sähköposti",
-      "kuvaus": "PitVan sähköposti ja jaetut osoitteet Google Workspacessa."
+      "kuvaus": "PitVan sähköposti"
     },
     {
       "id": "drive",
@@ -81,7 +81,7 @@
       "linkki": "https://drive.google.com/drive/my-drive",
       "osoite": "drive.google.com",
       "laji": "Tiedostot",
-      "kuvaus": "PitVan yhteiset tiedostot, jaetut asemat ja pöytäkirjat."
+      "kuvaus": "PitVan yhteiset tiedostot"
     },
     {
       "id": "kalenteri",
@@ -89,7 +89,7 @@
       "linkki": "https://calendar.google.com/calendar/r",
       "osoite": "calendar.google.com",
       "laji": "Kalenteri",
-      "kuvaus": "PitVan kalenterit: leirit, kokoukset ja kaluston varaukset."
+      "kuvaus": "PitVan kalenterit"
     },
     {
       "id": "hallinta",
@@ -97,7 +97,7 @@
       "linkki": "https://admin.google.com/",
       "osoite": "admin.google.com",
       "laji": "Vain ylläpitäjille",
-      "kuvaus": "Workspace-tilien, ryhmien ja käyttöoikeuksien hallinta. Aukeaa vain ylläpitäjille."
+      "kuvaus": "Workspace-tilien, ryhmien ja käyttöoikeuksien hallinta"
     }
   ]
 }
