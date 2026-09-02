@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PitVa — ATK-takaisinlinkki
  * Description: Adds a link back to the association's service front door at atk.pitva.fi, for signed-in users only.
- * Version:     1.2.0
+ * Version:     1.3.0
  * Author:      Pitkäjärven Vaeltajat ry
  *
  * Drop this file in wp-content/mu-plugins/. Must-use plugins load automatically
@@ -32,7 +32,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const PITVA_ATK_URL = 'https://atk.pitva.fi';
+/*
+ * Guarded because this file can legitimately exist twice at once: once in
+ * plugins/ and once in mu-plugins/, during the moments either side of a
+ * promotion. mu-plugins load first, so an unguarded second copy fatals the
+ * whole of wp-admin with "Cannot redeclare" — which is exactly what happened
+ * once. Guards make the order of operations stop mattering.
+ */
+if ( ! defined( 'PITVA_ATK_URL' ) ) {
+	define( 'PITVA_ATK_URL', 'https://atk.pitva.fi' );
+}
 
 /**
  * The link, as a node in the admin bar.
@@ -41,6 +50,7 @@ const PITVA_ATK_URL = 'https://atk.pitva.fi';
  * the site-name menu. `target="_blank"` is deliberate: someone editing a page
  * who clicks this should not lose the editor they were in.
  */
+if ( ! function_exists( 'pitva_atk_admin_bar_link' ) ) :
 function pitva_atk_admin_bar_link( WP_Admin_Bar $bar ): void {
 	if ( ! is_user_logged_in() ) {
 		return;
@@ -62,6 +72,7 @@ function pitva_atk_admin_bar_link( WP_Admin_Bar $bar ): void {
 	);
 }
 add_action( 'admin_bar_menu', 'pitva_atk_admin_bar_link', 100 );
+endif;
 
 /**
  * A matching entry on the dashboard's own menu, so it is reachable when the
@@ -70,6 +81,7 @@ add_action( 'admin_bar_menu', 'pitva_atk_admin_bar_link', 100 );
  * 'read' is the capability every registered user has, which matches the admin
  * bar's audience. The dashicon is the generic external-link one.
  */
+if ( ! function_exists( 'pitva_atk_dashboard_menu' ) ) :
 function pitva_atk_dashboard_menu(): void {
 	add_menu_page(
 		'PitVa ATK',
@@ -82,6 +94,7 @@ function pitva_atk_dashboard_menu(): void {
 	);
 }
 add_action( 'admin_menu', 'pitva_atk_dashboard_menu' );
+endif;
 
 /*
  * ---------------------------------------------------------------------------
