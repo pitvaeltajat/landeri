@@ -109,6 +109,24 @@ Do not take it below about 32px. The arrows are outlines, and under that the
 strokes and the gaps between them both fall inside a device pixel and the mark
 turns into a grey smudge.
 
+### The favicon
+
+`public/favicon.ico` and friends, generated from `public/icons/atk-mark.svg`.
+
+It is **not** the association's emblem, and that is deliberate. The emblem is
+outline art — `app/pitva-mark.tsx` says so itself — and at 16px its strokes and
+the gaps between them both fall under a device pixel. Traced solid it fares no
+better: the four arrows merge into one blob, and stroking the gaps wider does
+not rescue it. Rendered and inspected at 16px before shipping; it failed.
+
+So the favicon keeps the emblem's *idea* — four arrows pointing out from a
+centre, which is what a front door that dispatches you to nine services does —
+and drops everything that cannot survive the size: four solid triangles, white
+on the navy brand square, with gaps wide enough to read at 16px.
+
+The previous icons were Klapi's axe-in-a-stump, copied wholesale when this app
+was scaffolded and never swapped.
+
 ### The tile previews
 
 `app/previews.tsx`, and they split the same way the page does.
