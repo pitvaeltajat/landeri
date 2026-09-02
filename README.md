@@ -138,12 +138,25 @@ and are as captured, the last with the WordPress admin bar cropped off the top.
 **Re-capturing any of these means re-checking that.** A screenshot of a
 signed-in internal service is the one asset on this site that can leak.
 
-**The four Google tiles are Google's own hero mockups** from
-workspace.google.com, flattened onto white and letterboxed into the same 16:9
-band so the four sit at one visual weight. There is no signed-out screenshot of
-an inbox to take and a real one would publish somebody's mail. They are Google's
-artwork, used to point at Google's products; if that ever has to stop, the drawn
-marks they replaced are in the history.
+**Gmail, Drive and Kalenteri are the real products.** They were captured on the
+association's Workspace account with the redaction applied *in the page before
+the shutter* — an injected stylesheet blurring every file name, event chip,
+search field and the account button — so no readable content was ever written to
+a file. What survives is Google's own chrome. Gmail's inbox was empty at the
+time, which is why its list is unblurred.
+
+Do it that way if you re-capture them. Blurring afterwards means the unredacted
+frame existed on disk first.
+
+**Hallinta is still Google's marketing mockup.** The admin console demands a
+fresh sign-in challenge and nobody types a password to take a screenshot.
+
+### Editing the copy
+
+`app/services.json`. Every tile's name, host, label and description lives there,
+in page order, so the wording can be changed without opening a `.tsx` file. The
+`id` field is not copy — it selects the tile's image in `app/previews.tsx`, so a
+new service needs a row in both plus a 640px-wide file in `public/previews/`.
 
 Each tile also prints its host under its name. Two of these are called "Budu"
 and "Klapi", names that mean nothing outside the committee, and the address is

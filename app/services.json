@@ -1,0 +1,103 @@
+{
+  "_comment": [
+    "The tiles on atk.pitva.fi. Edit the copy here — nothing else needs touching.",
+    "",
+    "`kuvaus` is the sentence under the name; `laji` is the small uppercase label",
+    "along the bottom of the tile. Keep kuvaus to one sentence: the tile is about",
+    "260px wide and a third line pushes the label out of alignment with its row.",
+    "",
+    "`id` is not copy. It picks the tile's preview image in app/previews.tsx, so",
+    "changing one means changing that file too; adding a service means adding a",
+    "preview there and a 640px-wide image in public/previews/. `osoite` is what is",
+    "printed on the tile, `linkki` is where it actually goes — they differ where a",
+    "service has a deep link, as Nettisivut does.",
+    "",
+    "Order here is the order on the page."
+  ],
+
+  "palvelut": [
+    {
+      "id": "klapi",
+      "nimi": "Klapi",
+      "linkki": "https://klapi.pitva.fi",
+      "osoite": "klapi.pitva.fi",
+      "laji": "Kalustonhallinta",
+      "kuvaus": "Kaluston lainaus ja palautus: varaukset, lainassa olevat kamat ja kioskinäkymä."
+    },
+    {
+      "id": "budu",
+      "nimi": "Budu",
+      "linkki": "https://budu.pitva.fi",
+      "osoite": "budu.pitva.fi",
+      "laji": "Talous",
+      "kuvaus": "Talousarvion seuranta reaaliajassa: toteuma, jäljellä oleva budjetti ja tositteet."
+    },
+    {
+      "id": "tapahtumat",
+      "nimi": "Tapahtumamanageri",
+      "linkki": "https://tapahtumat.pitva.fi",
+      "osoite": "tapahtumat.pitva.fi",
+      "laji": "Tapahtumat",
+      "kuvaus": "Tapahtumien ilmoittautumiset ja niiden vienti PitVan kalenteriin."
+    },
+    {
+      "id": "kuvat",
+      "nimi": "Kuvat",
+      "linkki": "https://kuvat.pitva.fi",
+      "osoite": "kuvat.pitva.fi",
+      "laji": "Kuva-arkisto",
+      "kuvaus": "PitVan kuva-arkisto: leirit ja retket vuosittain omissa albumeissaan."
+    },
+    {
+      "id": "kululaskut",
+      "nimi": "Kululaskut",
+      "linkki": "https://pitva.kululaskut.fi",
+      "osoite": "pitva.kululaskut.fi",
+      "laji": "Kulukorvaukset",
+      "kuvaus": "Kulukorvaukset ja kilometrikorvaukset kuitteineen yhdellä lomakkeella."
+    },
+    {
+      "id": "nettisivut",
+      "nimi": "Nettisivut",
+      "linkki": "https://pitva.fi/kirjaudu",
+      "osoite": "pitva.fi",
+      "laji": "Oma kirjautuminen",
+      "kuvaus": "PitVan julkiset nettisivut."
+    }
+  ],
+
+  "workspace": [
+    {
+      "id": "gmail",
+      "nimi": "Gmail",
+      "linkki": "https://mail.google.com/mail/",
+      "osoite": "mail.google.com",
+      "laji": "Sähköposti",
+      "kuvaus": "PitVan sähköposti ja jaetut osoitteet Google Workspacessa."
+    },
+    {
+      "id": "drive",
+      "nimi": "Drive",
+      "linkki": "https://drive.google.com/drive/my-drive",
+      "osoite": "drive.google.com",
+      "laji": "Tiedostot",
+      "kuvaus": "PitVan yhteiset tiedostot, jaetut asemat ja pöytäkirjat."
+    },
+    {
+      "id": "kalenteri",
+      "nimi": "Kalenteri",
+      "linkki": "https://calendar.google.com/calendar/r",
+      "osoite": "calendar.google.com",
+      "laji": "Kalenteri",
+      "kuvaus": "PitVan kalenterit: leirit, kokoukset ja kaluston varaukset."
+    },
+    {
+      "id": "hallinta",
+      "nimi": "Hallinta",
+      "linkki": "https://admin.google.com/",
+      "osoite": "admin.google.com",
+      "laji": "Vain ylläpitäjille",
+      "kuvaus": "Workspace-tilien, ryhmien ja käyttöoikeuksien hallinta. Aukeaa vain ylläpitäjille."
+    }
+  ]
+}

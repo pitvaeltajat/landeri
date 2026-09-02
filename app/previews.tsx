@@ -15,12 +15,18 @@
  * Re-capturing any of these means checking that again — the README has the
  * detail.
  *
- * **The four Google ones** are Google's own hero mockups from
- * workspace.google.com, flattened onto white and letterboxed to the same 16:9
- * band. There is no signed-out screenshot of an inbox to take and a real one
- * would publish somebody's mail. They are Google's artwork, used to point at
- * Google's products; if that ever needs to stop, the drawn marks this replaced
- * are in the history.
+ * **Gmail, Drive and Kalenteri** are the real products, captured on the
+ * association's own Workspace account and redacted *in the page before the
+ * shutter*: a stylesheet was injected that blurs every file name, event chip,
+ * search field and the account button, so no readable content was ever written
+ * to a file. What is left is Google's own chrome — logos, nav rails, toolbars,
+ * the calendar grid. The Gmail inbox happened to be empty, which is why its
+ * list needs no blur.
+ *
+ * **Hallinta is still Google's marketing mockup** from workspace.google.com.
+ * The admin console demands a fresh sign-in challenge, and nobody types a
+ * password to take a screenshot. Replace it the same way as the others if you
+ * ever have the console open.
  */
 
 /**

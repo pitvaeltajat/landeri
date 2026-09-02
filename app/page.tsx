@@ -12,6 +12,7 @@ import {
   NettisivutPreview,
   TapahtumatPreview,
 } from './previews';
+import content from './services.json';
 
 /**
  * The front door. Signing in here mints the session cookie for the whole of
@@ -22,80 +23,40 @@ import {
  */
 export const dynamic = 'force-dynamic';
 
-type Destination = {
-  name: string;
-  /** Where the tile goes. Google ones get the account pinned on at render. */
-  href: string;
-  /** Shown on the tile: two services on adjacent tiles are told apart by host, not by name. */
-  domain: string;
-  kind: string;
-  description: string;
-  Preview: () => React.ReactElement;
+/**
+ * A tile, as written in `services.json`. The copy lives there so it can be
+ * edited without opening a .tsx file; only the picture is code.
+ */
+type Service = {
+  id: string;
+  nimi: string;
+  linkki: string;
+  osoite: string;
+  laji: string;
+  kuvaus: string;
 };
 
-/** The association's own apps. The first three read the cookie this app issues. */
-const SERVICES: Destination[] = [
-  {
-    name: 'Klapi',
-    href: 'https://klapi.pitva.fi',
-    domain: 'klapi.pitva.fi',
-    kind: 'Kalustonhallinta',
-    description: 'Kaluston lainaus ja palautus: varaukset, lainassa olevat kamat ja kioskinäkymä.',
-    Preview: KlapiPreview,
-  },
-  {
-    name: 'Budu',
-    href: 'https://budu.pitva.fi',
-    domain: 'budu.pitva.fi',
-    kind: 'Talous',
-    description: 'Talousarvion seuranta reaaliajassa: toteuma, jäljellä oleva budjetti ja tositteet.',
-    Preview: BuduPreview,
-  },
-  {
-    name: 'Tapahtumamanageri',
-    href: 'https://tapahtumat.pitva.fi',
-    domain: 'tapahtumat.pitva.fi',
-    kind: 'Tapahtumat',
-    description: 'Tapahtumien ilmoittautumiset ja niiden vienti PitVan kalenteriin.',
-    Preview: TapahtumatPreview,
-  },
-  {
-    // The association's photo archive. Not one of ours: kuvat.pitva.fi is a
-    // CNAME to pitva.kuvat.fi, so the gallery runs on kuvat.fi's platform and
-    // knows nothing about the session this app issues. Public to read, which is
-    // why its tile can carry a real screenshot with no blurring.
-    name: 'Kuvat',
-    href: 'https://kuvat.pitva.fi',
-    domain: 'kuvat.pitva.fi',
-    kind: 'Kuva-arkisto',
-    description: 'PitVan kuva-arkisto: leirit ja retket vuosittain omissa albumeissaan.',
-    Preview: KuvatPreview,
-  },
-  {
-    // Expense claims, on kululaskut.fi's platform — external like Kuvat, and
-    // like Kuvat it shares none of this app's session. The form is open to
-    // anyone with the link and asks for the claimant's own bank details, so it
-    // has no signed-in state to leak: the tile's screenshot is the empty form.
-    name: 'Kululaskut',
-    href: 'https://pitva.kululaskut.fi',
-    domain: 'pitva.kululaskut.fi',
-    kind: 'Kulukorvaukset',
-    description: 'Kulukorvaukset ja kilometrikorvaukset kuitteineen yhdellä lomakkeella.',
-    Preview: KululaskutPreview,
-  },
-  {
-    // The association's WordPress site. Deliberately not part of the shared
-    // session: it lives on pitkajarvenvaeltajat.fi, a different registrable
-    // domain, so a .pitva.fi cookie can never reach it.
-    name: 'Nettisivut',
-    href: 'https://pitva.fi/kirjaudu',
-    domain: 'pitva.fi',
-    // Short enough not to wrap in a 230px tile, which "Erillinen kirjautuminen" did.
-    kind: 'Oma kirjautuminen',
-    description: 'PitVan julkiset nettisivut.',
-    Preview: NettisivutPreview,
-  },
-];
+/**
+ * The one thing `services.json` cannot hold: which drawing belongs to which
+ * tile. Keyed by the `id` in that file, so adding a service means adding a row
+ * here and an image under public/previews/ — and a missing key is a build
+ * error rather than a blank tile, because `Tile` reads it unconditionally.
+ */
+const PREVIEWS: Record<string, () => React.ReactElement> = {
+  klapi: KlapiPreview,
+  budu: BuduPreview,
+  tapahtumat: TapahtumatPreview,
+  kuvat: KuvatPreview,
+  kululaskut: KululaskutPreview,
+  nettisivut: NettisivutPreview,
+  gmail: GmailPreview,
+  drive: DrivePreview,
+  kalenteri: KalenteriPreview,
+  hallinta: HallintaPreview,
+};
+
+/** The association's own. The first three read the cookie this app issues. */
+const SERVICES: Service[] = content.palvelut;
 
 /**
  * Google Workspace. Outside the shared session entirely — Google runs its own —
@@ -104,40 +65,7 @@ const SERVICES: Destination[] = [
  * "where do I find Klapi", and answering it in two places is how one of the two
  * answers goes stale.
  */
-const WORKSPACE: Destination[] = [
-  {
-    name: 'Gmail',
-    href: 'https://mail.google.com/mail/',
-    domain: 'mail.google.com',
-    kind: 'Sähköposti',
-    description: 'PitVan sähköposti ja jaetut osoitteet Google Workspacessa.',
-    Preview: GmailPreview,
-  },
-  {
-    name: 'Drive',
-    href: 'https://drive.google.com/drive/my-drive',
-    domain: 'drive.google.com',
-    kind: 'Tiedostot',
-    description: 'PitVan yhteiset tiedostot, jaetut asemat ja pöytäkirjat.',
-    Preview: DrivePreview,
-  },
-  {
-    name: 'Kalenteri',
-    href: 'https://calendar.google.com/calendar/r',
-    domain: 'calendar.google.com',
-    kind: 'Kalenteri',
-    description: 'PitVan kalenterit: leirit, kokoukset ja kaluston varaukset.',
-    Preview: KalenteriPreview,
-  },
-  {
-    name: 'Hallinta',
-    href: 'https://admin.google.com/',
-    domain: 'admin.google.com',
-    kind: 'Vain ylläpitäjille',
-    description: 'Workspace-tilien, ryhmien ja käyttöoikeuksien hallinta. Aukeaa vain ylläpitäjille.',
-    Preview: HallintaPreview,
-  },
-];
+const WORKSPACE: Service[] = content.workspace;
 
 /**
  * Point a Google link at the account that is signed in here.
@@ -167,8 +95,9 @@ function forAccount(href: string, email: string | null | undefined): string {
  * login screen — which is the confusing detour the front door exists to
  * prevent. Removing the element is the only way to remove the link.
  */
-function Tile({ destination, href }: { destination: Destination; href: string | null }) {
-  const { name, domain, kind, description, Preview } = destination;
+function Tile({ service, href }: { service: Service; href: string | null }) {
+  const { id, nimi, osoite, laji, kuvaus } = service;
+  const Preview = PREVIEWS[id];
   const body = (
     <>
       <span className="preview">
@@ -176,11 +105,11 @@ function Tile({ destination, href }: { destination: Destination; href: string | 
       </span>
       <span className="tile-body">
         <span className="tile-head">
-          <h3>{name}</h3>
-          <span className="domain">{domain}</span>
+          <h3>{nimi}</h3>
+          <span className="domain">{osoite}</span>
         </span>
-        <span className="tile-description">{description}</span>
-        <span className="kind">{kind}</span>
+        <span className="tile-description">{kuvaus}</span>
+        <span className="kind">{laji}</span>
       </span>
     </>
   );
@@ -220,7 +149,7 @@ export default async function Home() {
    */
   const workspace = session?.hd ?? null;
 
-  const workspaceTiles = workspace ? WORKSPACE : WORKSPACE.filter((d) => d.name !== 'Hallinta');
+  const workspaceTiles = workspace ? WORKSPACE : WORKSPACE.filter((d) => d.id !== 'hallinta');
 
   return (
     <div className="shell">
@@ -297,12 +226,8 @@ export default async function Home() {
         <section>
           <h2 className="section-title">PitVan palvelut</h2>
           <ul className="tiles">
-            {SERVICES.map((destination) => (
-              <Tile
-                key={destination.name}
-                destination={destination}
-                href={signedIn ? destination.href : null}
-              />
+            {SERVICES.map((service) => (
+              <Tile key={service.id} service={service} href={signedIn ? service.linkki : null} />
             ))}
           </ul>
         </section>
@@ -310,11 +235,11 @@ export default async function Home() {
         <section>
           <h2 className="section-title">Google Workspace</h2>
           <ul className="tiles">
-            {workspaceTiles.map((destination) => (
+            {workspaceTiles.map((service) => (
               <Tile
-                key={destination.name}
-                destination={destination}
-                href={signedIn ? forAccount(destination.href, user?.email) : null}
+                key={service.id}
+                service={service}
+                href={signedIn ? forAccount(service.linkki, user?.email) : null}
               />
             ))}
           </ul>
