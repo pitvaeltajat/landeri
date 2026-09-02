@@ -138,18 +138,18 @@ and are as captured, the last with the WordPress admin bar cropped off the top.
 **Re-capturing any of these means re-checking that.** A screenshot of a
 signed-in internal service is the one asset on this site that can leak.
 
-**Gmail, Drive and Kalenteri are the real products.** They were captured on the
+**All four Google tiles are the real products.** They were captured on the
 association's Workspace account with the redaction applied *in the page before
 the shutter* — an injected stylesheet blurring every file name, event chip,
-search field and the account button — so no readable content was ever written to
-a file. What survives is Google's own chrome. Gmail's inbox was empty at the
-time, which is why its list is unblurred.
+console card, search field and the account button — so no readable content was
+ever written to a file. What survives is Google's own chrome. Gmail's inbox was
+empty at the time, which is why its list is unblurred; the admin console's
+header is left crisp because the organisation named there is the association.
 
 Do it that way if you re-capture them. Blurring afterwards means the unredacted
-frame existed on disk first.
-
-**Hallinta is still Google's marketing mockup.** The admin console demands a
-fresh sign-in challenge and nobody types a password to take a screenshot.
+frame existed on disk first. The admin console additionally refuses to load
+without a fresh sign-in challenge, so that one has to be signed in by hand in
+the browser before it can be captured at all.
 
 ### Editing the copy
 
