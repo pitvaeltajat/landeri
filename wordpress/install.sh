@@ -25,19 +25,51 @@ KEY="$(mktemp)"
 cleanup() { rm -f "$KEY"; }
 trap cleanup EXIT INT TERM
 
-echo "==> minting a temporary key for $INSTANCE"
-aws lightsail get-instance-access-details \
-	--profile "$PROFILE" --instance-name "$INSTANCE" \
-	--query 'accessDetails.privateKey' --output text > "$KEY"
+DETAILS="$(aws lightsail get-instance-access-details --profile "$PROFILE" \
+	--instance-name "$INSTANCE" --output json)"
+IP="$(printf '%s' "$DETAILS" | python3 -c 'import json,sys;print(json.load(sys.stdin)["accessDetails"]["ipAddress"])')"
+USER_NAME="$(printf '%s' "$DETAILS" | python3 -c 'import json,sys;print(json.load(sys.stdin)["accessDetails"]["username"])')"
+printf '%s' "$DETAILS" | python3 -c 'import json,sys;print(json.load(sys.stdin)["accessDetails"]["privateKey"])' > "$KEY"
 chmod 600 "$KEY"
 
-IP="$(aws lightsail get-instance-access-details --profile "$PROFILE" \
-	--instance-name "$INSTANCE" --query 'accessDetails.ipAddress' --output text)"
-USER_NAME="$(aws lightsail get-instance-access-details --profile "$PROFILE" \
-	--instance-name "$INSTANCE" --query 'accessDetails.username' --output text)"
+# Try your own SSH setup first — config, agent, whatever normally gets you in —
+# and fall back to the temporary key Lightsail mints.
+#
+# The first version of this script did the opposite and *only* used the minted
+# key, with IdentitiesOnly=yes, which tells ssh to ignore the agent entirely.
+# That key only works while the instance still trusts the LightsailDefaultKeyPair;
+# this one has had its authorized_keys replaced since, so it is refused, and the
+# script had disabled the one thing that would have worked.
+BASE=(-o StrictHostKeyChecking=accept-new -o ConnectTimeout=10)
+SSH=()
+for candidate_user in "$USER_NAME" admin ubuntu bitnami debian; do
+	if ssh "${BASE[@]}" -o BatchMode=yes "$candidate_user@$IP" true 2>/dev/null; then
+		SSH=(ssh "${BASE[@]}" "$candidate_user@$IP"); break
+	fi
+	if ssh "${BASE[@]}" -o BatchMode=yes -i "$KEY" -o IdentitiesOnly=yes \
+		"$candidate_user@$IP" true 2>/dev/null; then
+		SSH=(ssh "${BASE[@]}" -i "$KEY" -o IdentitiesOnly=yes "$candidate_user@$IP"); break
+	fi
+done
 
-SSH=(ssh -i "$KEY" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new
-     -o ConnectTimeout=10 "$USER_NAME@$IP")
+if [ ${#SSH[@]} -eq 0 ]; then
+	cat >&2 <<EOF
+No SSH route into $INSTANCE ($IP).
+
+Tried your own keys/agent and the temporary key Lightsail mints, as
+admin/ubuntu/bitnami/debian. The instance says it uses LightsailDefaultKeyPair,
+but its authorized_keys has evidently been replaced, so that key is refused.
+
+If you know which key gets you in:
+  ssh -i <that key> <user>@$IP
+and once it works, this script will pick it up through your agent or config.
+
+Otherwise the plugin is already installed and working as an ordinary plugin via
+wp-admin; it just cannot be a must-use plugin without filesystem access.
+EOF
+	exit 1
+fi
+echo "==> in via: ${SSH[*]}"
 
 echo "==> locating the WordPress root"
 # wp-load.php is the marker; check the usual spots plus every vhost directory.
