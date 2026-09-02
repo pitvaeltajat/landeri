@@ -199,7 +199,7 @@ happens.
 | Klapi | `components/TopBar.tsx`, beside the wordmark and in the mobile drawer |
 | Budu | `app/page.tsx` and `app/admin/page.tsx`, in a `.brand-group` wrapper |
 | Tapahtumamanageri | `client/src/components/Layout.tsx`, same wrapper pattern |
-| WordPress | `wordpress/pitva-atk-backlink.php` → the site's `wp-content/mu-plugins/` |
+| WordPress | `pitva-atk-backlink.php` in the sibling **pitva.fi** repo → the site's `wp-content/mu-plugins/` |
 
 **Klapi's kiosk is the exception.** That screen is bolted to the store room wall
 and the point of it is that it goes nowhere: a link out to a signed-in front
