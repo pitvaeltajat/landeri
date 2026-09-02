@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PitVa — ATK-takaisinlinkki
  * Description: Adds a link back to the association's service front door at atk.pitva.fi, for signed-in users only.
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Pitkäjärven Vaeltajat ry
  *
  * Drop this file in wp-content/mu-plugins/. Must-use plugins load automatically
@@ -49,7 +49,9 @@ function pitva_atk_admin_bar_link( WP_Admin_Bar $bar ): void {
 	$bar->add_node(
 		array(
 			'id'    => 'pitva-atk',
-			'title' => 'ATK-palvelut',
+			// Long for an admin-bar node, deliberately: it is the way back to a
+			// place people arrive at from, not a label they scan past.
+			'title' => 'PitVa -> palaa ATK-näkymään',
 			'href'  => PITVA_ATK_URL,
 			'meta'  => array(
 				'title'  => 'Kaikki PitVan palvelut — atk.pitva.fi',
