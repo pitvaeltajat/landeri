@@ -169,6 +169,34 @@ The palette is copied verbatim from Klapi's `styles/globals.css` and Budu's
 reads as the same product as the services it links to. If the brand tokens move
 in those two, move them here as well.
 
+## Backlinks from the services
+
+Each service links back here, beside its own wordmark, so the front door is one
+click away rather than a URL to remember. They stay visible signed out, which is
+when they matter most — this is where the sign-in that covers all of them
+happens.
+
+| Where | How |
+| ----- | --- |
+| Klapi | `components/TopBar.tsx`, beside the wordmark and in the mobile drawer |
+| Budu | `app/page.tsx` and `app/admin/page.tsx`, in a `.brand-group` wrapper |
+| Tapahtumamanageri | `client/src/components/Layout.tsx`, same wrapper pattern |
+| WordPress | `wordpress/pitva-atk-backlink.php` → the site's `wp-content/mu-plugins/` |
+
+**Klapi's kiosk is the exception.** That screen is bolted to the store room wall
+and the point of it is that it goes nowhere: a link out to a signed-in front
+door would hand the next person in the queue somebody else's session. The test
+has to be `group === 'KIOSK' || (group === 'ADMIN' && adminExpiry)`, because
+`group` flips to `ADMIN` for the minutes an admin is elevated and checking it
+alone would put the link back exactly then.
+
+The WordPress one is a must-use plugin rather than a theme edit, so a theme
+change cannot take it away. It hangs off the admin bar and the dashboard menu,
+not the site navigation: pitkajarvenvaeltajat.fi is public, and the other three
+backlinks are only ever seen by people already inside an internal app. Putting
+atk.pitva.fi in the public menu would be a different decision — there is a
+commented-out filter at the foot of the file if you want to make it.
+
 ## Local preview
 
     npm install && npm run dev
