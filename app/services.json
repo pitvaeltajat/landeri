@@ -22,7 +22,7 @@
       "linkki": "https://klapi.pitva.fi",
       "osoite": "klapi.pitva.fi",
       "laji": "Kalustonhallinta",
-      "kuvaus": "Kaluston lainaus ja palautus: varaukset, lainassa olevat kamat ja kioskinäkymä."
+      "kuvaus": "Kaluston lainaus"
     },
     { 
       "id": "budu",
@@ -30,7 +30,7 @@
       "linkki": "https://budu.pitva.fi",
       "osoite": "budu.pitva.fi",
       "laji": "Talous",
-      "kuvaus": "Talousarvion seuranta reaaliajassa: toteuma, jäljellä oleva budjetti ja tositteet."
+      "kuvaus": "Talouden seuranta reaaliajassa"
     },
     {
       "id": "tapahtumat",
@@ -38,7 +38,7 @@
       "linkki": "https://tapahtumat.pitva.fi",
       "osoite": "tapahtumat.pitva.fi",
       "laji": "Tapahtumat",
-      "kuvaus": "Tapahtumien luonti ja niiden vienti PitVan tapahtumakalenteriin."
+      "kuvaus": "Tapahtumien luonti ja muokkaus. Synkkaa automaattisesti nettisivuille"
     },
     {
       "id": "kuvat",
