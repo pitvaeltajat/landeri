@@ -2,9 +2,9 @@
   "_comment": [
     "The tiles on atk.pitva.fi. Edit the copy here — nothing else needs touching.",
     "",
-    "`kuvaus` is the sentence under the name; `laji` is the small uppercase label",
-    "along the bottom of the tile. Keep kuvaus to one sentence: the tile is about",
-    "260px wide and a third line pushes the label out of alignment with its row.",
+    "`kuvaus` is the sentence under the name. Keep it to one sentence: the tile",
+    "is about 260px wide and a third line pushes the arrow out of alignment with",
+    "its row.",
     "",
     "`id` is not copy. It picks the tile's preview image in app/previews.tsx, so",
     "changing one means changing that file too; adding a service means adding a",
@@ -21,7 +21,6 @@
       "nimi": "Klapi",
       "linkki": "https://klapi.pitva.fi",
       "osoite": "klapi.pitva.fi",
-      "laji": "Kalustonhallinta",
       "kuvaus": "Kaluston lainaus"
     },
     { 
@@ -29,7 +28,6 @@
       "nimi": "Budu",
       "linkki": "https://budu.pitva.fi",
       "osoite": "budu.pitva.fi",
-      "laji": "Talous",
       "kuvaus": "Talouden seuranta reaaliajassa"
     },
     {
@@ -37,7 +35,6 @@
       "nimi": "Tapahtumamanageri",
       "linkki": "https://tapahtumat.pitva.fi",
       "osoite": "tapahtumat.pitva.fi",
-      "laji": "Tapahtumat",
       "kuvaus": "Tapahtumien luonti ja muokkaus. Synkkaa automaattisesti nettisivuille"
     },
     {
@@ -45,7 +42,6 @@
       "nimi": "Kuvat",
       "linkki": "https://kuvat.pitva.fi",
       "osoite": "kuvat.pitva.fi",
-      "laji": "Kuva-arkisto",
       "kuvaus": "PitVan kuva-arkisto"
     },
     {
@@ -53,7 +49,6 @@
       "nimi": "Kululaskut",
       "linkki": "https://pitva.kululaskut.fi",
       "osoite": "pitva.kululaskut.fi",
-      "laji": "Kulukorvaukset",
       "kuvaus": "Kulukorvaukset ja kilometrikorvaukset"
     },
     {
@@ -61,7 +56,6 @@
       "nimi": "Nettisivut",
       "linkki": "https://pitva.fi/kirjaudu",
       "osoite": "pitva.fi",
-      "laji": "Oma kirjautuminen",
       "kuvaus": "PitVan nettisivut"
     }
   ],
@@ -72,7 +66,6 @@
       "nimi": "Gmail",
       "linkki": "https://mail.google.com/mail/",
       "osoite": "mail.google.com",
-      "laji": "Sähköposti",
       "kuvaus": "PitVan sähköposti"
     },
     {
@@ -80,7 +73,6 @@
       "nimi": "Drive",
       "linkki": "https://drive.google.com/drive/my-drive",
       "osoite": "drive.google.com",
-      "laji": "Tiedostot",
       "kuvaus": "PitVan yhteiset tiedostot"
     },
     {
@@ -88,7 +80,6 @@
       "nimi": "Kalenteri",
       "linkki": "https://calendar.google.com/calendar/r",
       "osoite": "calendar.google.com",
-      "laji": "Kalenteri",
       "kuvaus": "PitVan kalenterit"
     },
     {
@@ -96,7 +87,6 @@
       "nimi": "Hallinta",
       "linkki": "https://admin.google.com/",
       "osoite": "admin.google.com",
-      "laji": "Vain ylläpitäjille",
       "kuvaus": "Workspace-tilien, ryhmien ja käyttöoikeuksien hallinta"
     }
   ]

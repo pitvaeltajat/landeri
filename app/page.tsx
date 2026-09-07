@@ -32,7 +32,6 @@ type Service = {
   nimi: string;
   linkki: string;
   osoite: string;
-  laji: string;
   kuvaus: string;
 };
 
@@ -96,7 +95,7 @@ function forAccount(href: string, email: string | null | undefined): string {
  * prevent. Removing the element is the only way to remove the link.
  */
 function Tile({ service, href }: { service: Service; href: string | null }) {
-  const { id, nimi, osoite, laji, kuvaus } = service;
+  const { id, nimi, osoite, kuvaus } = service;
   const Preview = PREVIEWS[id];
   const body = (
     <>
@@ -109,7 +108,7 @@ function Tile({ service, href }: { service: Service; href: string | null }) {
           <span className="domain">{osoite}</span>
         </span>
         <span className="tile-description">{kuvaus}</span>
-        <span className="kind">{laji}</span>
+        <span className="kind" aria-hidden="true" />
       </span>
     </>
   );

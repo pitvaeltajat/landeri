@@ -375,20 +375,15 @@ a:focus-visible {
   color: var(--muted-foreground);
   font-size: 14px;
 }
-/* Pushed to the bottom of the tile so the pills line up across a row whatever
-   the description's length. */
+/* An empty row holding nothing but the arrow, pushed to the bottom of the tile
+   so the arrows line up across a row whatever the description's length. */
 .tile .kind {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-end;
   margin-top: auto;
   padding-top: 12px;
   color: var(--muted-foreground);
-  font-size: 12px;
-  font-weight: 650;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 /* The arrow rides the bottom row now that the head's right edge belongs to the
    host. It leans into the hover rather than appearing on it — an affordance
@@ -398,8 +393,6 @@ a:focus-visible {
   display: inline-block;
   flex: 0 0 auto;
   font-size: 16px;
-  font-weight: 400;
-  letter-spacing: normal;
   transition:
     transform 0.15s ease,
     color 0.15s ease;
