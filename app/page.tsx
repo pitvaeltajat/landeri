@@ -159,7 +159,7 @@ export default async function Home() {
         </a>
         {user ? (
           <div className="user">
-            <span title={user.email ?? undefined}>{user.email}</span>
+            <span title={user.email ?? undefined}>{user.name || user.email}</span>
             <form
               action={async () => {
                 'use server';
