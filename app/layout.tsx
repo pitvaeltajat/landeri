@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'ATK — Pitkäjärven Vaeltajat',
+  title: 'ATK | Pitkäjärven Vaeltajat',
   description:
     'Pitkäjärven Vaeltajat ry:n sisäiset palvelut: Klapi, Budu, Tapahtumamanageri, nettisivut ja Google Workspace.',
   manifest: '/site.webmanifest',
