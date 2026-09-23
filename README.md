@@ -94,7 +94,7 @@ Next.js App Router, one page. The palette is copied verbatim from Klapi's
 ### The emblem
 
 `app/pitva-mark.tsx`, traced from the association's own
-`pitvalogo_ilmantaustaa.png` and shared with Budu. It appears twice: at 34px in
+`pitvalogo_ilmantaustaa.png` and shared with Budu. It appears twice: at 32px (as in Klapi) in
 the topbar, where it is a navigation affordance sharing a bar with the sign-out
 control, and centred above the grid at `clamp(76px, 13vw, 120px)`, where it is
 the association putting its name to the page.

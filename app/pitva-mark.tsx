@@ -8,7 +8,7 @@
  * drawing has to come out near-white on the navy topbar. An <img> cannot be
  * recoloured by the page around it.
  *
- * The default 34px rather than something tidier like 24: the arrows are drawn
+ * The default 32px, as in Klapi, rather than something tidier like 24: the arrows are drawn
  * as outlines, so below about 32 the strokes and the gaps between them both
  * fall under a device pixel and the mark collapses into a grey smudge. That is
  * a floor, not a fixed size — the hero on the front page asks for a much larger
@@ -18,7 +18,7 @@
  * which is how the hero scales the mark with the viewport. Both `width` and
  * `height` are presentation attributes, so any stylesheet rule wins over them.
  */
-export function PitvaMark({ size = 34, className }: { size?: number; className?: string }) {
+export function PitvaMark({ size = 32, className }: { size?: number; className?: string }) {
   return (
           <svg viewBox="227 226 939 939" width={size} height={size} className={className} fill="currentColor" aria-hidden="true" focusable="false">
             <g transform="translate(0,1400) scale(0.1,-0.1)">

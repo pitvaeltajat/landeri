@@ -151,36 +151,38 @@ export default async function Home() {
   const workspaceTiles = workspace ? WORKSPACE : WORKSPACE.filter((d) => d.id !== 'hallinta');
 
   return (
-    <div className="shell">
+    <>
       <header className="topbar">
-        <a className="brand" href="/">
-          <PitvaMark />
-          Pitkäjärven Vaeltajat ry
-        </a>
-        {user ? (
-          <div className="user">
-            <span title={user.email ?? undefined}>{user.name || user.email}</span>
-            <form
-              action={async () => {
-                'use server';
-                await signOut({ redirectTo: '/' });
-              }}
-            >
-              <button className="link-button" type="submit">
-                Kirjaudu ulos
-              </button>
-            </form>
-          </div>
-        ) : (
-          <a className="topbar-link" href="https://pitva.fi">
-            pitva.fi
+        <div className="topbar-inner">
+          <a className="brand" href="/">
+            <PitvaMark />
+            Pitkäjärven Vaeltajat ry
           </a>
-        )}
+          {user ? (
+            <div className="user">
+              <span title={user.email ?? undefined}>{user.name || user.email}</span>
+              <form
+                action={async () => {
+                  'use server';
+                  await signOut({ redirectTo: '/' });
+                }}
+              >
+                <button className="link-button" type="submit">
+                  Kirjaudu ulos
+                </button>
+              </form>
+            </div>
+          ) : (
+            <a className="topbar-link" href="https://pitva.fi">
+              pitva.fi
+            </a>
+          )}
+        </div>
       </header>
 
-      <main>
+      <main className="shell">
         {/*
-          The emblem, centred and at size. The topbar's copy is a 34px
+          The emblem, centred and at size. The topbar's copy is a 32px
           navigation affordance that has to share a bar with the sign-out
           control; this one is the association putting its name to the page,
           which is a different job and needs the room to do it.
@@ -244,6 +246,6 @@ export default async function Home() {
           </ul>
         </section>
       </main>
-    </div>
+    </>
   );
 }
