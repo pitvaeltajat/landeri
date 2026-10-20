@@ -48,6 +48,23 @@ export function KlapiPreview() {
 export function BuduPreview() {
   return <Shot src="/previews/budu.jpg" height={340} />;
 }
+/**
+ * Kolo has no screenshot yet (WIP), so instead of a `<Shot>` of a missing file
+ * it draws a wireframe of the two things it controls — the door and the heating.
+ */
+export function KoloPreview() {
+  return (
+    <svg viewBox="0 0 640 360" role="img" aria-hidden="true">
+      <g fill="none" stroke="#9b97bd" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="150" y="70" width="150" height="225" rx="6" />
+        <circle cx="272" cy="188" r="7" fill="#9b97bd" stroke="none" />
+        <circle cx="445" cy="185" r="68" />
+        <path d="M445 185 L445 137" />
+        <path d="M403 230 A68 68 0 0 1 487 230" opacity="0.5" />
+      </g>
+    </svg>
+  );
+}
 export function TapahtumatPreview() {
   return <Shot src="/previews/tapahtumat.jpg" height={360} />;
 }

@@ -31,6 +31,14 @@
       "kuvaus": "Talouden seuranta reaaliajassa"
     },
     {
+      "id": "kolo",
+      "nimi": "Kolo",
+      "linkki": "https://kolo.pitva.fi",
+      "osoite": "kolo.pitva.fi",
+      "kuvaus": "Kolon oven ja lämmityksen ohjaus",
+      "wip": true
+    },
+    {
       "id": "tapahtumat",
       "nimi": "Tapahtumamanageri",
       "linkki": "https://tapahtumat.pitva.fi",

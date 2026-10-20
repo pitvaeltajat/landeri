@@ -7,6 +7,7 @@ import {
   HallintaPreview,
   KalenteriPreview,
   KlapiPreview,
+  KoloPreview,
   KululaskutPreview,
   KuvatPreview,
   NettisivutPreview,
@@ -33,6 +34,8 @@ type Service = {
   linkki: string;
   osoite: string;
   kuvaus: string;
+  /** Work in progress: the tile links but carries a WIP badge. */
+  wip?: boolean;
 };
 
 /**
@@ -44,6 +47,7 @@ type Service = {
 const PREVIEWS: Record<string, () => React.ReactElement> = {
   klapi: KlapiPreview,
   budu: BuduPreview,
+  kolo: KoloPreview,
   tapahtumat: TapahtumatPreview,
   kuvat: KuvatPreview,
   kululaskut: KululaskutPreview,
@@ -95,11 +99,12 @@ function forAccount(href: string, email: string | null | undefined): string {
  * prevent. Removing the element is the only way to remove the link.
  */
 function Tile({ service, href }: { service: Service; href: string | null }) {
-  const { id, nimi, osoite, kuvaus } = service;
+  const { id, nimi, osoite, kuvaus, wip } = service;
   const Preview = PREVIEWS[id];
   const body = (
     <>
       <span className="preview">
+        {wip && <span className="wip-badge">Kesken</span>}
         <Preview />
       </span>
       <span className="tile-body">

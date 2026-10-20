@@ -497,3 +497,24 @@ a:focus-visible {
     transform: none;
   }
 }
+
+/* Work-in-progress badge, overlaid on a tile's preview band. The band already
+   clips (overflow:hidden); anchor the badge to it. */
+.preview {
+  position: relative;
+}
+.wip-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px rgb(34 30 93 / 25%);
+}
